@@ -1,0 +1,7 @@
+bet_contract/.anchor
+bet_contract/.DS_Store
+bet_contract/target
+bet_contract/**/*.rs.bk
+bet_contract/node_modules
+bet_contract/test-ledger
+bet_contract/.yarn
