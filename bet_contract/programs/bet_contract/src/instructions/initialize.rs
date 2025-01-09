@@ -1,4 +1,4 @@
-use anchor_lang::prelude::*;
+use anchor_lang::{prelude::*, system_program::{transfer, Transfer}};
 use crate::state::config::Config;
 
 const LAMPORTS_PER_SOL: u64 = 1000000000;
@@ -31,14 +31,24 @@ pub struct Initialize<'info> {
 impl<'info> Initialize<'info> {
     pub fn initialize_bet_with_initializer(&mut self, bumps: &InitializeBumps, amount_of_bet_in_sol: u64, rating: u64) -> Result<()> {
         self.config.set_inner(Config {
-            pubkey_initializer: self.initializer.to_account_info(),
+            pubkey_initializer: self.initializer.key(),
             rating_initializer: rating,
-            
+            config_bump: bumps.config,
+            vault_bump: bumps.vault,
+            pubkey_taker: None,
+            rating_taker: None,
+            winner: None,
+            has_been_taken: false,
+            amount_of_bet_in_sol: amount_of_bet_in_sol,
         });
 
+        let cpi_program = self.system_program.to_account_info();
+        let cpi_accounts = Transfer {
+            from: self.initializer.to_account_info(),
+            to: self.vault.to_account_info(),
+        };
+        let cpi_ctx = CpiContext::new(cpi_program, cpi_accounts);
 
-        
-
-        Ok(())
+        transfer(cpi_ctx, amount_of_bet_in_sol * LAMPORTS_PER_SOL)
     }
 }

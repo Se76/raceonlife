@@ -11,4 +11,5 @@ pub struct Config {
     pub vault_bump: u8,
     pub winner: Option<Pubkey>,
     pub has_been_taken: bool,
+    pub amount_of_bet_in_sol: u64,
 }
