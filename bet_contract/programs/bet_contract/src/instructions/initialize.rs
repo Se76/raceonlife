@@ -30,7 +30,11 @@ pub struct Initialize<'info> {
 
 impl<'info> Initialize<'info> {
     pub fn initialize_bet_with_initializer(&mut self, bumps: &InitializeBumps, amount_of_bet_in_sol: u64, rating: u64) -> Result<()> {
-
+        self.config.set_inner(Config {
+            pubkey_initializer: self.initializer.to_account_info(),
+            rating_initializer: rating,
+            
+        });
 
 
         
