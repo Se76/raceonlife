@@ -1,6 +1,8 @@
 use anchor_lang::prelude::*;
 use crate::state::config::Config;
 
+const LAMPORTS_PER_SOL: u64 = 1000000000;
+
 #[derive(Accounts)]
 pub struct Initialize<'info> {
     #[account(mut)]
@@ -24,4 +26,15 @@ pub struct Initialize<'info> {
     )]
     pub vault: SystemAccount<'info>,
     pub system_program: Program<'info, System>,
+}
+
+impl<'info> Initialize<'info> {
+    fn into_create_vault_context(&mut self, bumps: &InitializeBumps, amount_of_bet_in_sol: u64, rating: u64) -> Result<()> {
+
+
+
+        
+
+        Ok(())
+    }
 }
