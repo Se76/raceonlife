@@ -47,6 +47,7 @@ impl<'info> Initialize<'info> {
             from: self.initializer.to_account_info(),
             to: self.vault.to_account_info(),
         };
+        
         let cpi_ctx = CpiContext::new(cpi_program, cpi_accounts);
 
         transfer(cpi_ctx, amount_of_bet_in_sol * LAMPORTS_PER_SOL)
