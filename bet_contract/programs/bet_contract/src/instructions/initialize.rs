@@ -29,7 +29,7 @@ pub struct Initialize<'info> {
 }
 
 impl<'info> Initialize<'info> {
-    fn into_create_vault_context(&mut self, bumps: &InitializeBumps, amount_of_bet_in_sol: u64, rating: u64) -> Result<()> {
+    pub fn initialize_bet_with_initializer(&mut self, bumps: &InitializeBumps, amount_of_bet_in_sol: u64, rating: u64) -> Result<()> {
 
 
 
