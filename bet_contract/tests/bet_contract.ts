@@ -20,30 +20,6 @@ const commitment: Commitment = "confirmed";
 const connection = new Connection("http://127.0.0.1:8899", commitment);
 
 const provider = anchor.AnchorProvider.env();
-// const foo = async () => {
-//   console.log("airdrop");
-//   // await connection.requestAirdrop(
-//   //   INITIALIZER_KEYPAIR.publicKey,
-//   //   100_000_000_000 // 100 SOL
-//   // );
-//   const signature = await connection.requestAirdrop(INITIALIZER_KEYPAIR.publicKey, 100_000_000_000);
-//   console.log("airdrop done");
-// };
-  
-
-//   const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-//   async function sleepyWork() {
-//     console.log("I'm going to sleep for 1 second.");
-//     await sleep(1000);
-//     console.log("I woke up after 1 second.");
-//   }
-
-  // const requestAirdrop = async (publicKey: anchor.web3.PublicKey, lamports: number) => {
-  //   console.log("Requesting airdrop...");
-  //   const signature = await connection.requestAirdrop(publicKey, lamports);
-  //   console.log(`Airdrop of ${lamports / 1_000_000_000} SOL complete.`);
-  // };
 
 
 describe("bet_contract", () => {
@@ -64,5 +40,4 @@ describe("bet_contract", () => {
     // 
     console.log("Your transaction signature", tx);
   });
-  
 });
