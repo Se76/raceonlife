@@ -32,6 +32,9 @@ pub struct Initialize<'info> {
 
 impl<'info> Initialize<'info> {
     pub fn initialize_bet_with_initializer(&mut self, bumps: &InitializeBumps, amount_of_bet_in_sol: u64, rating: u64) -> Result<()> {
+
+        require!(self.initializers.get_lamports() >= self.config.amount_of_bet_in_sol * LAMPORTS_PER_SOL, BetContractError::NotEnoughFunds);
+
         self.config.set_inner(Config {
             pubkey_initializer: self.initializer.key(),
             rating_initializer: rating,
