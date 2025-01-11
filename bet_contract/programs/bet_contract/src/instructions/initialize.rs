@@ -3,6 +3,7 @@ use crate::state::config::Config;
 
 pub const LAMPORTS_PER_SOL: u64 = 1000000000;
 
+
 #[derive(Accounts)]
 pub struct Initialize<'info> {
     #[account(mut)]
