@@ -45,7 +45,7 @@ impl<'info> Initialize<'info> {
             rating_taker: None,
             winner: None,
             has_been_taken: false,
-            amount_of_bet_in_sol: amount_of_bet_in_sol,
+            amount_of_bet_in_sol,
         });
 
         let cpi_program = self.system_program.to_account_info();

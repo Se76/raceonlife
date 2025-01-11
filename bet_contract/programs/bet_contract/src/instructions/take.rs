@@ -1,5 +1,4 @@
-use anchor_lang::prelude::*;
-
+use anchor_lang::{prelude::*, system_program::{transfer, Transfer}};
 use crate::state::Config;
 use crate::errors::BetContractError;
 use crate::instructions::initialize::LAMPORTS_PER_SOL;
@@ -39,8 +38,15 @@ impl<'info> Take<'info> {
         self.config.has_been_taken = true;
         self.config.pubkey_taker = Some(self.taker.key());
         self.config.rating_taker = Some(rating);
+        
+        let cpi_program = self.system_program.to_account_info();
+        let cpi_accounts = Transfer {
+            from: self.initializer.to_account_info(),
+            to: self.vault.to_account_info(),
+        };
 
+        let cpi_ctx = CpiContext::new(cpi_program, cpi_accounts);
 
-        Ok(())
+        transfer(cpi_ctx, self.config.amount_of_bet_in_sol * LAMPORTS_PER_SOL)
     }
 }
