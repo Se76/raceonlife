@@ -1,7 +1,7 @@
 use anchor_lang::{prelude::*, system_program::{transfer, Transfer}};
 use crate::state::config::Config;
 
-const LAMPORTS_PER_SOL: u64 = 1000000000;
+pub const LAMPORTS_PER_SOL: u64 = 1000000000;
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {

@@ -1,6 +1,10 @@
 use anchor_lang::prelude::*;
 
 use crate::state::Config;
+use crate::errors::BetContractError;
+use crate::instructions::initialize::LAMPORTS_PER_SOL;
+
+
 
 #[derive(Accounts)]
 pub struct Take<'info> {
@@ -28,10 +32,14 @@ pub struct Take<'info> {
 
 impl<'info> Take<'info> {
     pub fn take_bet(&mut self, rating: u64) -> Result<()> {
+
+        require!(!self.config.has_been_taken, BetContractError::BetAlreadyTaken);
+        require!(self.taker.get_lamports() >= self.config.amount_of_bet_in_sol * LAMPORTS_PER_SOL, BetContractError::NotEnoughFunds);
+
         self.config.has_been_taken = true;
         self.config.pubkey_taker = Some(self.taker.key());
         self.config.rating_taker = Some(rating);
-        
+
 
         Ok(())
     }
