@@ -13,4 +13,8 @@ pub mod bet_contract {
     pub fn initialize(ctx: Context<Initialize>, amount_of_bet_in_sol: u64, rating: u64) -> Result<()> {
         ctx.accounts.initialize_bet_with_initializer(&ctx.bumps, amount_of_bet_in_sol, rating)
     }
+
+    pub fn take_bet(ctx: Context<Take>, rating: u64) -> Result<()> {
+        ctx.accounts.take_bet(rating)
+    }
 }
