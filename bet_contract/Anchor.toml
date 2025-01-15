@@ -6,6 +6,8 @@ skip-lint = false
 
 [programs.localnet]
 bet_contract = "FBzKRcpiLyb6zMM8XVU8mBvJdHxyknGBioihUGFxcuh4"
+# [programs.localnet]
+# bet_contract = "B4s3iEZPMeyewR19zVoZd34cUMEcL3TyyNFrJXmXrFSQ"
 
 # [registry]
 # url = "https://api.apr.dev"

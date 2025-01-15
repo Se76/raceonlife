@@ -6,6 +6,9 @@ mod errors;
 
 declare_id!("FBzKRcpiLyb6zMM8XVU8mBvJdHxyknGBioihUGFxcuh4");
 
+// declare_id!("B4s3iEZPMeyewR19zVoZd34cUMEcL3TyyNFrJXmXrFSQ");
+
+/// CHECK:
 #[program]
 pub mod bet_contract {
     use super::*;

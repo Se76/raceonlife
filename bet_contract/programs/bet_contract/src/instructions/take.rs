@@ -7,6 +7,7 @@ use crate::instructions::initialize::LAMPORTS_PER_SOL;
 
 #[derive(Accounts)]
 pub struct Take<'info> {
+    /// CHECK: This is not dangerous because we don't read or write from this account
     pub initializer: AccountInfo<'info>,
     #[account(mut)]
     pub taker: Signer<'info>,
