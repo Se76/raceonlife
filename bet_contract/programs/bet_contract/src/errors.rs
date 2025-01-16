@@ -5,5 +5,7 @@ pub enum BetContractError {
     #[msg("The bet has already been taken")]
     BetAlreadyTaken,
     #[msg("There is not enough funds")]
-    NotEnoughFunds
+    NotEnoughFunds,
+    #[msg("Another wallet address was inserted")]
+    NotTheCorrectsWinner
 }

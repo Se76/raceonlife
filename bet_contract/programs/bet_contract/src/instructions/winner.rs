@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-use crate::state::Config;
+use crate::{errors::BetContractError, state::Config};
 
 #[derive(Accounts)]
 pub struct Winner<'info> {
@@ -29,6 +29,15 @@ pub struct Winner<'info> {
         bump = config.vault_bump,
     )]
     pub vault: SystemAccount<'info>,
-    // TODO vault, config
     pub system_program: Program<'info, System>
+}
+
+impl <'info> Winner<'info> {
+    pub fn winner(&mut self, winner: Pubkey) -> Result<()> {
+        require!(self.config.has_been_taken, BetContractError::BetAlreadyTaken);
+        require!(self.config.pubkey_initializer == self.initializer.key(), BetContractError::NotTheCorrectsWinner);
+        require!(self.config.pubkey_taker.unwrap() == self.taker.key(), BetContractError::NotTheCorrectsWinner);
+        require!(winner == self.config.pubkey_taker.unwrap() || winner == self.config.pubkey_initializer, BetContractError::NotTheCorrectsWinner);
+        Ok(())
+    }
 }
