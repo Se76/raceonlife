@@ -38,6 +38,19 @@ impl <'info> Winner<'info> {
         require!(self.config.pubkey_initializer == self.initializer.key(), BetContractError::NotTheCorrectsWinner);
         require!(self.config.pubkey_taker.unwrap() == self.taker.key(), BetContractError::NotTheCorrectsWinner);
         require!(winner == self.config.pubkey_taker.unwrap() || winner == self.config.pubkey_initializer, BetContractError::NotTheCorrectsWinner);
+
+        if winner == self.config.pubkey_taker.unwrap() {
+            self.config.winner = Some(self.taker.key());
+        } else {
+            self.config.winner = Some(self.initializer.key());
+        }
+
+        let cpi_program = self.system_program.to_account_info();
+        let cpi_accounts = Transfer {
+            from: self.vault.to_account_info(),
+            to: self.config.winner.unwrap().to_account_info(),
+        }
+
         Ok(())
     }
 }
